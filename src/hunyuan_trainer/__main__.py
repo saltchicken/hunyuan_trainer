@@ -11,7 +11,7 @@ from pathlib import Path
 import platform
 import shutil
 
-script_dir = Path(__file__).parent
+script_dir = Path(__file__).parent / "src" / "hunyuan_trainer"
 
 def setup_training_folder(target_folder):
     training_folder = Path.home() / "hunyuan_training"
