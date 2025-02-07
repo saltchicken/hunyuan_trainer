@@ -94,6 +94,8 @@ def main():
 
     if result.returncode == 0:
         print(f"Successfully started session: {session_name}")
+        if result.stdout:
+            print(result.stdout)
     else:
         print(f"Failed to start session: {session_name}")
         print("Error output:", result.stderr)
