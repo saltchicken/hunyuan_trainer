@@ -1,8 +1,5 @@
-# NCCL_P2P_DISABLE="1" NCCL_IB_DISABLE="1" deepspeed --num_gpus=1 train.py --deepspeed --config examples/hunyuan_video.toml
-
 # NCCL_P2P_DISABLE="1" NCCL_IB_DISABLE="1" deepspeed --num_gpus=1 train.py --deepspeed --config examples/hunyuan_video.toml --resume_from_checkpoint
 
-import subprocess
 import toml
 import os
 import sys
@@ -66,8 +63,11 @@ def setup_training_folder(target_folder):
     with open(f"{training_folder}/{target_folder}/dataset.toml", "w") as dataset_file_out:
         toml.dump(dataset, dataset_file_out)
 
-    with open(f"{training_folder}/{target_folder}/hunyuan_video.toml", "w") as video_file_out:
+    config = f"{training_folder}/{target_folder}/hunyuan_video.toml"
+    with open(config, "w") as video_file_out:
         toml.dump(video, video_file_out)
+
+    return config
 
 
 def main():
@@ -79,16 +79,7 @@ def main():
     parser.add_argument("target_folder", type=str, help="Target folder to store the output files")
     args = parser.parse_args()
 
-    setup_training_folder(args.target_folder)
+    config = setup_training_folder(args.target_folder)
 
-    print("running command")
-
-    command = (
-        'screen -dmS diffusion_screen bash -c "'
-        'source ~/miniconda3/etc/profile.d/conda.sh && '
-        'conda activate diffusion-pipe && '
-        'NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 deepspeed --num_gpus=1 train.py --deepspeed '
-        '--config hunyuan_training/test_train/hunyuan_video.toml"'
-    )
-
-    subprocess.run(command, shell=True, check=True)
+    print("Run the following command")
+    print(f"NCCL_P2P_DISABLE='1' NCCL_IB_DISABLE='1' deepspeed --num_gpus=1 train.py --deepspeed --config {config}")
