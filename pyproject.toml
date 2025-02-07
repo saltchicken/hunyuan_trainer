@@ -14,4 +14,8 @@ hunyuan_trainer = "hunyuan_trainer.__main__:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+"hunyuan_trainer" = ["*.toml"]
 
+[tool.setuptools]
+include-package-data = true
