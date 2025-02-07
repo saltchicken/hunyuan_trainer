@@ -69,7 +69,7 @@ def setup_training_folder(target_folder):
         toml.dump(video, video_file_out)
 
 
-if __name__ == "__main__":
+def main()
     if platform.system() != "Linux":
         print("This works only on linux")
         sys.exit(1)
