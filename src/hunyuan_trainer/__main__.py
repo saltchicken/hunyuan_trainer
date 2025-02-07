@@ -11,9 +11,10 @@ from pathlib import Path
 import platform
 import shutil
 
+script_dir = Path(__file__).parent
 
 def setup_training_folder(target_folder):
-    training_folder = Path("~/hunyuan_training")
+    training_folder = Path.home() / "hunyuan_training"
 
     if training_folder.exists() and training_folder.is_dir():
         print(f"Using {training_folder}")
@@ -30,10 +31,10 @@ def setup_training_folder(target_folder):
             print("Folder not created. Exiting.")
             sys.exit(1)
 
-    with open("dataset.toml", "r") as dataset_file:
+    with open(f"{script_dir}/dataset.toml", "r") as dataset_file:
         dataset = toml.load(dataset_file)
 
-    with open("hunyuan_video.toml", "r") as video_file:
+    with open(f"{script_dir}/hunyuan_video.toml", "r") as video_file:
         video = toml.load(video_file)
 
     input_folder = f"{training_folder}/{target_folder}/input"
