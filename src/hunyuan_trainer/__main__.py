@@ -81,7 +81,13 @@ def main():
 
     setup_training_folder(args.target_folder)
 
-    # session_name = "my_session"
+    session_name = "hunyuan_trainer"
 
+    cmd = (
+        'conda run --name diffusion-pipe && '
+        'export NCCL_P2P_DISABLE="1" && '
+        'export NCCL_IB_DISABLE="1" && '
+        'deepspeed --num_gpus=1 train.py --deepspeed --config hunyuan_video.toml'
+    )
     #
-    # subprocess.run(["screen", "-dmS", session_name, "bash", "-c", 'NCCL_P2P_DISABLE="1"', 'NCCL_IB_DISABLE="1"', "deepspeed", "--num_gpus=1", "train.py", "--deepspeed", "--config", "hunyuan_video.toml"])
+    subprocess.run(["screen", "-dmS", session_name, "bash", "-c", cmd])
