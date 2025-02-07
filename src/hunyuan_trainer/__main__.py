@@ -81,21 +81,14 @@ def main():
 
     setup_training_folder(args.target_folder)
 
-    session_name = "hunyuan_trainer"
+    print("running command")
 
-    cmd = (
-        'conda run --name diffusion-pipe && '
-        'export NCCL_P2P_DISABLE="1" && '
-        'export NCCL_IB_DISABLE="1" && '
-        'deepspeed --num_gpus=1 train.py --deepspeed --config hunyuan_video.toml'
+    command = (
+        'screen -dmS diffusion_screen bash -c "'
+        'source ~/miniconda3/etc/profile.d/conda.sh && '
+        'conda activate diffusion-pipe && '
+        'NCCL_P2P_DISABLE=1 NCCL_IB_DISABLE=1 deepspeed --num_gpus=1 train.py --deepspeed '
+        '--config hunyuan_training/test_train/hunyuan_video.toml"'
     )
-    #
-    result = subprocess.run(["screen", "-dmS", session_name, "bash", "-c", cmd])
 
-    if result.returncode == 0:
-        print(f"Successfully started session: {session_name}")
-        if result.stdout:
-            print(result.stdout)
-    else:
-        print(f"Failed to start session: {session_name}")
-        print("Error output:", result.stderr)
+    subprocess.run(command, shell=True, check=True)
