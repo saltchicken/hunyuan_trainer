@@ -90,4 +90,10 @@ def main():
         'deepspeed --num_gpus=1 train.py --deepspeed --config hunyuan_video.toml'
     )
     #
-    subprocess.run(["screen", "-dmS", session_name, "bash", "-c", cmd])
+    result = subprocess.run(["screen", "-dmS", session_name, "bash", "-c", cmd])
+
+    if result.returncode == 0:
+        print(f"Successfully started session: {session_name}")
+    else:
+        print(f"Failed to start session: {session_name}")
+        print("Error output:", result.stderr)
