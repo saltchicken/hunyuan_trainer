@@ -87,7 +87,7 @@ def main():
     parser.add_argument("target_folder", type=str, help="Target folder to store the output files")
     args = parser.parse_args()
 
-    command = input(f"Would you like to create training_text for {args.target_folder}? [y/n]").strip().lower())
+    command = input(f"Would you like to create training_text for {args.target_folder}? [y/n]").strip().lower()
     if command.lower() == "y":
         training_text = input("Please enter training_text: ")
         create_txt_for_videos_one_shot(args.target_folder, training_text)
