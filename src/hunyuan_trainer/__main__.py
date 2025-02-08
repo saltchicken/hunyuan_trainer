@@ -69,6 +69,14 @@ def setup_training_folder(target_folder):
 
     return config
 
+def create_txt_for_videos_one_shot(directory, training_text):
+    for filename in os.listdir(directory):
+        if filename.endswith(".mkv") or filename.endswith(".mp4"):
+            txt_filename = os.path.splitext(filename)[0] + ".txt"
+            txt_path = os.path.join(directory, txt_filename)
+            with open(txt_path, "w") as txt_file:
+                txt_file.write(training_text)
+
 
 def main():
     if platform.system() != "Linux":
@@ -79,6 +87,13 @@ def main():
     parser.add_argument("target_folder", type=str, help="Target folder to store the output files")
     args = parser.parse_args()
 
+    command = input(f"Would you like to create training_text for {args.target_folder}? [y/n]").strip().lower())
+    if command.lower() == "y":
+        training_text = input("Please enter training_text: ")
+        create_txt_for_videos_one_shot(args.target_folder, training_text)
+        print("Created text for training videos")
+    else:
+        print("Skipping text creation")
     config = setup_training_folder(args.target_folder)
 
     print("Run the following command")
