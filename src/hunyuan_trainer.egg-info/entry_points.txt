@@ -1,0 +1,2 @@
+[console_scripts]
+hunyuan_trainer = hunyuan_trainer.__main__:main

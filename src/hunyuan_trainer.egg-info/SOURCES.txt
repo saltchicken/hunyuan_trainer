@@ -1,0 +1,10 @@
+pyproject.toml
+src/hunyuan_trainer/__init__.py
+src/hunyuan_trainer/__main__.py
+src/hunyuan_trainer/dataset.toml
+src/hunyuan_trainer/hunyuan_video.toml
+src/hunyuan_trainer.egg-info/PKG-INFO
+src/hunyuan_trainer.egg-info/SOURCES.txt
+src/hunyuan_trainer.egg-info/dependency_links.txt
+src/hunyuan_trainer.egg-info/entry_points.txt
+src/hunyuan_trainer.egg-info/top_level.txt
