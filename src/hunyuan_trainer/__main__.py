@@ -71,7 +71,7 @@ def setup_training_folder(target_folder):
 
 def create_txt_for_videos_one_shot(directory, training_text):
     for filename in os.listdir(directory):
-        if filename.endswith(".mkv") or filename.endswith(".mp4") or filename.endswith(".flv"):
+        if filename.endswith(".mkv") or filename.endswith(".mp4") or filename.endswith(".flv") or filename.endswith(".jpg"):
             txt_filename = os.path.splitext(filename)[0] + ".txt"
             txt_path = os.path.join(directory, txt_filename)
             with open(txt_path, "w") as txt_file:
